@@ -1,0 +1,60 @@
+<mat-card
+  class="mt-2 shadow-2xl cursor-pointer my-card"
+  (click)="onCardClick()"
+>
+  <div class="flex">
+    <div class="flex items-center justify-center w-16 p-2">
+      <img
+        src="{{ car.image }}"
+        alt="Car Image"
+        class="object-cover w-6 rounded-md shadow-inner h-18"
+      />
+    </div>
+    <div class="card-content">
+      <mat-card-header>
+        <mat-card-title class="font-semibold">{{ car.title }}</mat-card-title>
+      </mat-card-header>
+
+      <div class="flex gap-12">
+        <div class="mr-4 unit-details">
+          <div class="flex items-center mb-4">
+            <mat-icon class="text-icon">person</mat-icon>
+            <div class="ml-2">
+              <div class="small-text">Driver</div>
+              <div class="mt-1 small-text">{{ car.driverName }}</div>
+            </div>
+          </div>
+
+          <div class="flex items-center mb-4">
+            <mat-icon class="text-icon">camera</mat-icon>
+            <div class="ml-2">
+              <div class="small-text">Camera</div>
+              <div class="mt-1 small-text">
+                {{ car.offline ? "Offline" : "Online" }}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="unit-sensors">
+          <div class="flex items-center mb-4">
+            <mat-icon class="text-icon">thermostat</mat-icon>
+            <div class="ml-2">
+              <div class="small-text">Temperature</div>
+              <div class="mt-1 small-text">{{ car.temperature }}</div>
+            </div>
+          </div>
+          <div class="flex items-center mb-4">
+            <mat-icon class="text-icon">wifi</mat-icon>
+            <div class="ml-2">
+              <div class="small-text">Pot</div>
+              <div class="mt-1 small-text">
+                {{ car.connected ? "Connected" : "DisConnected" }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-card>

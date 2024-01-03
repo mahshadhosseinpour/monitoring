@@ -1,0 +1,77 @@
+syntax = "proto3";
+option go_package = ".;unittracking";
+
+package unittracking;
+
+service TrackingService {
+  rpc Units(UnitsRequest) returns (UnitsResponse);
+  // LastValues creates a stream to display the metrics received from the device
+  // in realtime
+  rpc LastValues(LastValuesRequest) returns (stream LastValuesResponse) {}
+  // Metrics returns the list of metrics defined on the server along with their
+  // attributes
+  rpc Metrics(MetricsRequest) returns (MetricsResponse);
+}
+message UnitsRequest {
+  uint32 limit = 1;
+  uint32 offset = 2;
+}
+message UnitsResponse {
+  repeated Unit units = 1;
+  // total_units: The total number of units that the user can access
+  // total_units is only sent when the requested offset is 0
+  uint32 total_units = 2;
+}
+message Unit {
+  uint64 id = 1;
+  string title = 2;
+  string icon = 4;
+  // metric_name: The name of the device metrics that will be sent to the server
+  repeated string metric_name = 5;
+}
+
+message LastValuesRequest {
+  // unit_ids : ID of the units which we want to receive their locations and
+  // metrics in real time
+  repeated uint64 unit_ids = 1;
+}
+message LastValuesResponse { repeated Point points = 1; }
+
+message Point {
+  uint64 unit_id = 1;
+  int64 time = 2;
+  // key: metric_name, value: metric_value
+  map<string, double> metric_values = 3;
+}
+
+message MetricsRequest {
+// acceptable values are [ 'en', 'fa_ir']
+ string language = 1;
+}
+message MetricsResponse {
+  // metrics: key: metric_name ,value: Metric
+  // A metric name is a unique string to identify it
+  map<string, Metric> metrics = 1;
+}
+
+message Metric {
+  string title = 2; // translate in server side
+  string icon = 3;
+  Format format = 4;
+}
+enum Format {
+  FORMAT_UNKNOWN = 0;
+  FORMAT_NUMBER = 1;
+  FORMAT_LENGTH = 2; // meter
+  FORMAT_DURATION_TIME = 3;
+  FORMAT_TIME = 4;
+  FORMAT_BOOLEAN = 5;
+  FORMAT_SPEED = 6;             // Km/H
+  FORMAT_VOLUME = 7;            // Lit.float
+  FORMAT_ANGLE = 8;             // Radian
+  FORMAT_WEIGHT = 9;            // Kg
+  FORMAT_TEMPERATURE = 10;      // Centigrade
+  FORMAT_SIGNAL_STRENGTH = 11;  // dBb
+  FORMAT_ROTATIONAL_SPEED = 12; // rpm
+  FORMAT_ACCELERATION = 13;
+}

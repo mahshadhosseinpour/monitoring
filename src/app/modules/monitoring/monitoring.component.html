@@ -1,0 +1,13 @@
+<div class="relative w-full h-full overflow-hidden">
+  <app-map [liveLocation]="liveLocation"></app-map>
+
+  <div
+    class="absolute top-0 left-0 z-10 w-1/4 h-full p-4 mt-10 ml-4 bg-white rounded-tl-lg rounded-tr-lg bg-opacity-80"
+  >
+    <app-car-list
+      (cardClick)="onCardClick($event)"
+      [car]="car"
+      *ngFor="let car of cars"
+    ></app-car-list>
+  </div>
+</div>
