@@ -6,4 +6,5 @@ export interface CarFormData {
   offline: boolean;
   temperature: number;
   connected: boolean;
+  location: { latitude: number; longitude: number };
 }

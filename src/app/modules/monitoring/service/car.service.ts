@@ -15,6 +15,7 @@ export class CarService {
       offline: false,
       temperature: 25,
       connected: true,
+      location: { latitude: 10, longitude: 2 }
     },
     {
       id: 2,
@@ -24,7 +25,8 @@ export class CarService {
       offline: true,
       temperature: 20,
       connected: false,
-    },
+      location: { latitude: 30, longitude: 2 }
+    }
   ];
   getCars(): Observable<CarFormData[]> {
     return of(this.cars);

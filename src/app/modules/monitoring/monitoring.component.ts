@@ -4,7 +4,7 @@ import { CarService } from './service/car.service';
 
 @Component({
   selector: 'app-monitoring',
-  templateUrl: './monitoring.component.html',
+  templateUrl: './monitoring.component.html'
 })
 export class MonitoringComponent {
   cars!: CarFormData[];
@@ -18,16 +18,16 @@ export class MonitoringComponent {
 
   loadCars(): void {
     this.carService.getCars().subscribe(
-      (data) => {
+      data => {
         this.cars = data;
       },
-      (error) => {
+      error => {
         console.error('Error fetching cars:', error);
       }
     );
   }
   onCardClick(e: CarFormData): void {
     debugger;
-    this.liveLocation = { latitude: 10, longitude: 2 };
+    this.liveLocation = e.location;
   }
 }
