@@ -7,7 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "proto:generate": "protoc --plugin=protoc-gen-ng=$(which protoc-gen-ng) --ng_out=./src/proto -I ../proto $(find ../proto -iname \"*.proto\")"
+    "proto:generate": "protoc --plugin=protoc-gen-ng=./node_modules/.bin/protoc-gen-ng --ng_out=./src/app/grpc -I ./src/app/modules/monitoring/protos/tracking.proto/"
   },
   "private": true,
   "dependencies": {
